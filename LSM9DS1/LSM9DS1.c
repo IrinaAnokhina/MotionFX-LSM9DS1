@@ -30,15 +30,19 @@ void init_LSM9DS1_I2C (void)
 	//Magn
 	data[0] = 0x04;
 	status = HAL_I2C_Mem_Write(&hi2c3, ADDR, 0x21, I2C_MEMADD_SIZE_8BIT, data, 0x01, 100);//CTRL_REG2_M RESET 
-	//HAL_Delay(10);
+	HAL_Delay(10);
 	data[0] = 0x04;
 	status = HAL_I2C_Mem_Write(&hi2c3, ADDR, 0x21,I2C_MEMADD_SIZE_8BIT, data, 0x01, 100);//CTRL_REG2_M RESET 
-	//HAL_Delay(10);
+	HAL_Delay(10);
+	data[0] = 0x60;
+	status = HAL_I2C_Mem_Write(&hi2c3, ADDR, 0x21,I2C_MEMADD_SIZE_8BIT, data, 0x01, 100);//CTRL_REG2_M 
+	
 	status = HAL_I2C_Mem_Read(&hi2c3, ADDR, 0x0F, I2C_MEMADD_SIZE_8BIT, data, 0x01, 100);//WHO_AM_I
-	//HAL_Delay(10);
+//HAL_Delay(10);
 	data[0] = 0x7E;
 	status = HAL_I2C_Mem_Write(&hi2c3, ADDR, 0x20,I2C_MEMADD_SIZE_8BIT, data, 0x01, 100);//CTRL_REG1_M Axel 
 	//HAL_Delay(10);
+	
 	data[0] = 0x00;
 	status = HAL_I2C_Mem_Write(&hi2c3, ADDR, 0x22,I2C_MEMADD_SIZE_8BIT, data, 0x01, 100);//CTRL_REG3_M Continuous-conversion mode
 	//HAL_Delay(10);

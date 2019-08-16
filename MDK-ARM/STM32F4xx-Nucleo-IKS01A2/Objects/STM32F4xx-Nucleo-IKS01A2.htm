@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\STM32F4xx-Nucleo-IKS01A2\Objects\STM32F4xx-Nucleo-IKS01A2.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\STM32F4xx-Nucleo-IKS01A2\Objects\STM32F4xx-Nucleo-IKS01A2.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Aug 16 13:47:26 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Aug 16 19:27:06 2019
 <BR><P>
 <H3>Maximum Stack Usage =       1016 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -2948,7 +2948,7 @@ Global Symbols
 <LI><a href="#[15a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hts221_block_data_update_set
 </UL>
 
-<P><STRONG><a name="[1fe]"></a>init_LSM9DS1_I2C</STRONG> (Thumb, 408 bytes, Stack size 24 bytes, lsm9ds1.o(i.init_LSM9DS1_I2C))
+<P><STRONG><a name="[1fe]"></a>init_LSM9DS1_I2C</STRONG> (Thumb, 452 bytes, Stack size 24 bytes, lsm9ds1.o(i.init_LSM9DS1_I2C))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = init_LSM9DS1_I2C &rArr; HAL_I2C_Mem_Write &rArr; I2C_RequestMemoryWrite &rArr; I2C_WaitOnMasterAddressFlagUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
@@ -3757,7 +3757,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IKS01A2_MOTION_SENSOR_Init
 </UL>
 
-<P><STRONG><a name="[ef]"></a>Accelero_Sensor_Handler</STRONG> (Thumb, 212 bytes, Stack size 32 bytes, main.o(i.Accelero_Sensor_Handler))
+<P><STRONG><a name="[ef]"></a>Accelero_Sensor_Handler</STRONG> (Thumb, 222 bytes, Stack size 32 bytes, main.o(i.Accelero_Sensor_Handler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = Accelero_Sensor_Handler &rArr; HAL_I2C_Mem_Read &rArr; I2C_RequestMemoryRead &rArr; I2C_WaitOnMasterAddressFlagUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Serialize_s32
@@ -3829,7 +3829,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[1c2]"></a>Magneto_Sensor_Handler</STRONG> (Thumb, 456 bytes, Stack size 72 bytes, main.o(i.Magneto_Sensor_Handler))
+<P><STRONG><a name="[1c2]"></a>Magneto_Sensor_Handler</STRONG> (Thumb, 438 bytes, Stack size 72 bytes, main.o(i.Magneto_Sensor_Handler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 176 + Unknown Stack Size
 <LI>Call Chain = Magneto_Sensor_Handler &rArr; HAL_I2C_Mem_Read &rArr; I2C_RequestMemoryRead &rArr; I2C_WaitOnMasterAddressFlagUntilTimeout
 </UL>

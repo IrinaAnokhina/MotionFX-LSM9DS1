@@ -488,14 +488,14 @@ static void Accelero_Sensor_Handler(TMsg *Msg, uint32_t Instance)
 	
 	int16_t a;
 	a=(data[1] << 8)|data[0];
-		AccValue.x = (-1)* a/10;//(int16_t)data[1] << 8 | data[0];							
+		AccValue.x =(-1) *a/16;//(int16_t)data[1] << 8 | data[0];							
 		 status = HAL_I2C_Mem_Read(&hi2c3, 0xD6, 0x2A, I2C_MEMADD_SIZE_8BIT , data, 0x02, 100);
 a=(data[1] << 8)|data[0];	
-		AccValue.y = a/10;//(int16_t)data[1] << 8 | data[0];	
+		AccValue.y = a/16;//(int16_t)data[1] << 8 | data[0];	
 		status = HAL_I2C_Mem_Read(&hi2c3, 0xD6, 0x2C, I2C_MEMADD_SIZE_8BIT , data, 0x02, 100); 
 		a=(data[1] << 8)|data[0];
-		AccValue.z = a/10;//(int16_t)data[1] << 8 | data[0];	
-		
+		AccValue.z = a/16;//(int16_t)data[1] << 8 | data[0];	*/
+	
     Serialize_s32(&Msg->Data[19], (int32_t)AccValue.x, 4);
     Serialize_s32(&Msg->Data[23], (int32_t)AccValue.y, 4);
     Serialize_s32(&Msg->Data[27], (int32_t)AccValue.z, 4);
@@ -510,7 +510,7 @@ a=(data[1] << 8)|data[0];
  */
 static void Gyro_Sensor_Handler(TMsg *Msg, uint32_t Instance)
 {
-  //if ((SensorsEnabled & GYROSCOPE_SENSOR) == GYROSCOPE_SENSOR)
+ // if ((SensorsEnabled & GYROSCOPE_SENSOR) == GYROSCOPE_SENSOR)
  // {
    // (void)IKS01A2_MOTION_SENSOR_GetAxes(Instance, MOTION_GYRO, &GyrValue);
 	
@@ -519,13 +519,13 @@ static void Gyro_Sensor_Handler(TMsg *Msg, uint32_t Instance)
 	
 	int16_t a;
 	a=(data[1] << 8)|data[0];
-		GyrValue.x = (-1) * a/10;					
+		GyrValue.x = -a/50;					
 		 status = HAL_I2C_Mem_Read(&hi2c3, 0xD6, 0x1A, I2C_MEMADD_SIZE_8BIT , data, 0x02, 100);
 a=(data[1] << 8)|data[0];	
-		GyrValue.y = a/10;
+		GyrValue.y = a/50;
 		status = HAL_I2C_Mem_Read(&hi2c3, 0xD6, 0x1C, I2C_MEMADD_SIZE_8BIT , data, 0x02, 100); 
 		a=(data[1] << 8)|data[0];
-		GyrValue.z =  a/10;	
+		GyrValue.z =  a/50;	
 		
     Serialize_s32(&Msg->Data[31], GyrValue.x, 4);
     Serialize_s32(&Msg->Data[35], GyrValue.y, 4);
@@ -553,26 +553,26 @@ static void Magneto_Sensor_Handler(TMsg *Msg, uint32_t Instance)
 #endif
 
  // if ((SensorsEnabled & MAGNETIC_SENSOR) == MAGNETIC_SENSOR)
-  //{
+ // {
    // (void)IKS01A2_MOTION_SENSOR_GetAxes(Instance, MOTION_MAGNETO, &MagValue);
 		uint8_t data[2] = {0};
  status = HAL_I2C_Mem_Read(&hi2c3, 0x3D, 0x28, I2C_MEMADD_SIZE_8BIT , data, 0x02, 100); 
 	
 	int16_t a;
 	a=(data[1] << 8)|data[0];
-		MagValue.x = a/10;					
+		MagValue.x = a; //-a/5-40;
 		 status = HAL_I2C_Mem_Read(&hi2c3, 0x3D, 0x2A, I2C_MEMADD_SIZE_8BIT , data, 0x02, 100);
 a=(data[1] << 8)|data[0];	
-		MagValue.y = a/10;
+		MagValue.y =  a; //-a/5 +160;
 		status = HAL_I2C_Mem_Read(&hi2c3, 0x3D, 0x2C, I2C_MEMADD_SIZE_8BIT , data, 0x02, 100); 
 		a=(data[1] << 8)|data[0];
-		MagValue.z =  a/10;	
+		MagValue.z = a; ///5 + 560;	
 		
     if (MagCalStatus == 0U)
     {
       mag_data_in.mag[0] = (float)MagValue.x * FROM_MGAUSS_TO_UT50;
       mag_data_in.mag[1] = (float)MagValue.y * FROM_MGAUSS_TO_UT50;
-      mag_data_in.mag[2] = (float)MagValue.z * FROM_MGAUSS_TO_UT50;
+      mag_data_in.mag[2] = (float)MagValue.z * FROM_MGAUSS_TO_UT50 ;
 
 #if ((defined (USE_STM32F4XX_NUCLEO)) || (defined (USE_STM32L4XX_NUCLEO)) || (defined (USE_STM32L1XX_NUCLEO)))
       mag_data_in.time_stamp = (int)MagTimeStamp;
@@ -600,8 +600,8 @@ a=(data[1] << 8)|data[0];
 
         /* Disable magnetometer calibration */
         MotionFX_manager_MagCal_stop(ALGO_PERIOD);
-      }
-    //}
+     // }
+    }
 
     MagValue.x = (int32_t)(MagValue.x - MagOffset.x);
     MagValue.y = (int32_t)(MagValue.y - MagOffset.y);
